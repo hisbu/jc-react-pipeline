@@ -30,5 +30,14 @@ pipeline {
       }
     }
 
+    //stage empat
+    stage ("build docker images"){
+      steps{
+        script {
+          app = docker.build("hisbu/reactapp-jcde")
+        }
+      }
+    }
+
   }
 }
