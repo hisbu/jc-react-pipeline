@@ -68,7 +68,7 @@ pipeline {
     }
 
     // stage delapan
-    stage("cleanup docker image"){
+    stage("cleanup docker images"){
       steps{
         sh 'docker rmi hisbu/reactapp-jcde'
       }
