@@ -14,5 +14,12 @@ pipeline {
       }
     }
 
+    //stage dua
+    stage ('Test project') {
+      steps{
+        sh './jenkins/scripts/test.sh'
+      }
+    }
+
   }
 }
