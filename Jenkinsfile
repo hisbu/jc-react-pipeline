@@ -71,9 +71,19 @@ pipeline {
     stage("cleanup docker images"){
       steps{
         sh 'docker rmi registry.hub.docker.com/hisbu/reactapp-jcde:latest'
-        sh "docker rmi registry.hub.docker.com/hisbu/reactapp-jcde:'${DOCKER_TAG}'"
+        // sh "docker rmi registry.hub.docker.com/hisbu/reactapp-jcde:'${DOCKER_TAG}'"
       }
     }
+
+    //stage sembilan
+    stage("deploy app to kubernetes cluster")
+      steps{
+        sh "chmod +x changeTag.sh"
+        sh "./changeTag.sh ${DOCKER_TAG}"
+        withKubConfig([credentialsId: 'kubecconfig-clusterjcde', serverUrl:'https://34.101.207.52']){
+          sh 'kubectl apply -f reactapp-config.k8s.yaml'
+        }
+      }
 
   }
 }
