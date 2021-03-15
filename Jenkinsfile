@@ -70,8 +70,8 @@ pipeline {
     // stage delapan
     stage("cleanup docker images"){
       steps{
-        sh 'docker rmi hisbu/reactapp-jcde:latest'
-        sh "docker rmi hisbu/reactapp-jcde:'${DOCKER_TAG}'"
+        sh 'docker rmi registry.hub.docker.com/hisbu/reactapp-jcde:latest'
+        sh "docker rmi registry.hub.docker.com/hisbu/reactapp-jcde:'${DOCKER_TAG}'"
       }
     }
 
