@@ -44,7 +44,7 @@ pipeline {
     stage ("test docker image"){
       steps{
         sh 'docker run -d --rm --name testimage -p 8081:80 hisbu/reactapp-jcde'
-        input message: "Finished test image? (Click procced to continue)"
+        // input message: "Finished test image? (Click procced to continue)"
       }
     }
 
