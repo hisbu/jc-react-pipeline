@@ -1,9 +1,10 @@
 pipeline {
   agent any
 
-  // environment {
-  //   CI = true
-  // }
+  environment {
+    // CI = true
+    DOCKER_TAG = getDockerTag()
+  }
 
   stages {
     // stage pertama
@@ -54,5 +55,29 @@ pipeline {
       }
     }
 
+    //stage tujuh
+    stage ("push image to registry"){
+      steps{
+        script{
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-hisbu'){
+            app.push("${DOCKER_TAG}")
+            app.push("latest")
+          }
+        }
+      }
+    }
+
+    // stage delapan
+    stage("cleanup docker image"){
+      steps{
+        sh 'docker rmi hisbu/reactapp-jcde'
+      }
+    }
+
   }
+}
+
+def getDockerTag(){
+  def tag = sh script: "git rev-parse HEAD", returnStdout: true
+  return tag
 }
