@@ -17,6 +17,7 @@ pipeline {
     //stage dua
     stage ('Test project') {
       steps{
+        sh 'chmod +x jenkins/script/test.sh'
         sh './jenkins/scripts/test.sh'
       }
     }
