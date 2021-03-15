@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    CI = true
+    CI = 'true'
   }
 
   stages {
@@ -17,7 +17,7 @@ pipeline {
     //stage dua
     stage ('Test project') {
       steps{
-        sh 'chmod +x jenkins/script/test.sh'
+        sh 'chmod +x jenkins/scripts/test.sh'
         sh './jenkins/scripts/test.sh'
       }
     }
