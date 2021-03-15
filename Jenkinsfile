@@ -76,7 +76,7 @@ pipeline {
     }
 
     //stage sembilan
-    stage("deploy app to kubernetes cluster")
+    stage("deploy app to kubernetes cluster"){
       steps{
         sh "chmod +x changeTag.sh"
         sh "./changeTag.sh ${DOCKER_TAG}"
@@ -84,6 +84,7 @@ pipeline {
           sh 'kubectl apply -f reactapp-config.k8s.yaml'
         }
       }
+    }
 
   }
 }
