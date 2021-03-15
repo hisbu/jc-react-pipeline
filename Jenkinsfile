@@ -39,5 +39,20 @@ pipeline {
       }
     }
 
+    //stage lima
+    stage ("test docker image"){
+      steps{
+        sh 'docker run -d --rm --name testimage -p 8081:80 hisbu/reactapp-jcde'
+        input message: "Finished test image? (Click procced to continue)"
+      }
+    }
+
+    //stage enam
+    stage("clean up docker test"){
+      steps{
+        sh 'docker stop testimage'
+      }
+    }
+
   }
 }
